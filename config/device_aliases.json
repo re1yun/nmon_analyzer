@@ -1,0 +1,5 @@
+{
+  "mmcblk2": "eMMC",
+  "eth0": "LAN",
+  "wlan0": "Wi-Fi"
+}

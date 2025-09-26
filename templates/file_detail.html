@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ analysis.file_id }} · NMON Analyzer{% endblock %}
+{% block content %}
+  <section id="file-detail-root" data-file-id="{{ analysis.file_id }}">
+    <h2>{{ analysis.file_id }}</h2>
+    <p>
+      Host: <strong>{{ analysis.hostname or 'Unknown' }}</strong><br />
+      Start time: {{ analysis.start_time or 'Unknown' }}<br />
+      Overall status: <span class="badge {{ analysis.overall|lower }}">{{ analysis.overall }}</span>
+    </p>
+
+    <div class="chart-container">
+      <h3>CPU Busy</h3>
+      <canvas id="cpu-chart" height="200"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Memory Active</h3>
+      <canvas id="memory-chart" height="200"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>eMMC Writes</h3>
+      <canvas id="emmc-chart" height="200"></canvas>
+    </div>
+    <div class="chart-container">
+      <h3>Network Throughput</h3>
+      <canvas id="network-chart" height="200"></canvas>
+    </div>
+
+    <h3>Rule results</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Rule</th>
+          <th>Level</th>
+          <th>Summary</th>
+        </tr>
+      </thead>
+      <tbody id="checks-table-body"></tbody>
+    </table>
+  </section>
+{% endblock %}

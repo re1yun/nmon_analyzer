@@ -1,0 +1,34 @@
+{
+  "cpu": {
+    "busy_pct_warn": 75.0,
+    "busy_pct_crit": 90.0,
+    "sustained_minutes": 5
+  },
+  "memory_leak": {
+    "series": "mem_active_kb",
+    "window_minutes_min": 20,
+    "slope_kb_per_min_warn": 1000,
+    "slope_kb_per_min_crit": 3000,
+    "r2_min": 0.7
+  },
+  "emmc_write": {
+    "device_regex": "^(mmcblk\\d+|mmc\\d+)$",
+    "kbps_warn": 2000,
+    "kbps_crit": 5000,
+    "sustained_minutes": 5,
+    "use_percentile95": true
+  },
+  "network": {
+    "iface_include_regex": "^(eth\\d+|enp\\S+|wlan\\d+)$",
+    "sum_directions": true,
+    "kbps_warn": 5000,
+    "kbps_crit": 20000,
+    "sustained_minutes": 5,
+    "use_percentile95": true
+  },
+  "general": {
+    "min_points": 30,
+    "timezone": "local",
+    "warn_counts_in_summary": true
+  }
+}

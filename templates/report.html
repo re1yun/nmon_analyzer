@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Summary Report · NMON Analyzer{% endblock %}
+{% block content %}
+  <h2>Summary Report</h2>
+  <p>Generated {{ generated }}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Host</th>
+        <th>Overall</th>
+        <th>CPU</th>
+        <th>Memory</th>
+        <th>eMMC</th>
+        <th>Network</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for analysis in analyses %}
+        {% set lookup = {} %}
+        {% for check in analysis.checks %}
+          {% set _ = lookup.update({check.rule: check}) %}
+        {% endfor %}
+        <tr>
+          <td>{{ analysis.file_id }}</td>
+          <td>{{ analysis.hostname or '—' }}</td>
+          <td>{{ analysis.overall }}</td>
+          <td>{{ lookup.get('cpu_sustained_high', {}).get('level', 'OK') }}</td>
+          <td>{{ lookup.get('memory_leak', {}).get('level', 'OK') }}</td>
+          <td>{{ lookup.get('excessive_emmc_writes', {}).get('level', 'OK') }}</td>
+          <td>{{ lookup.get('excessive_network_usage', {}).get('level', 'OK') }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
