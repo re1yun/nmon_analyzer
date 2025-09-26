@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · NMON Analyzer{% endblock %}
+{% block content %}
+  <section class="upload-section">
+    <form id="upload-form" class="upload-area">
+      <input id="file-input" type="file" name="files" accept=".nmon" multiple hidden />
+      <div id="drop-area">
+        <p><strong>Drop NMON files here</strong> or click to browse.</p>
+        <p>All processing happens locally on your machine.</p>
+      </div>
+      <button type="submit" class="primary">Analyze files</button>
+    </form>
+  </section>
+
+  <section class="card-grid">
+    <div class="card"><h3>Total</h3><div class="value" id="summary-total">0</div></div>
+    <div class="card"><h3>OK</h3><div class="value" id="summary-ok">0</div></div>
+    <div class="card"><h3>WARN (files)</h3><div class="value" id="summary-warn">0</div></div>
+    <div class="card"><h3>CRIT (files)</h3><div class="value" id="summary-crit">0</div></div>
+    <div class="card"><h3>WARN (checks)</h3><div class="value" id="summary-warn-checks">0</div></div>
+    <div class="card"><h3>CRIT (checks)</h3><div class="value" id="summary-crit-checks">0</div></div>
+  </section>
+
+  <section>
+    <div class="button-row">
+      <a class="primary" href="/export/csv">Export CSV</a>
+      <a class="primary" href="/report" target="_blank">Print Report</a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Host</th>
+          <th>Start time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="files-table-body"></tbody>
+    </table>
+  </section>
+{% endblock %}
